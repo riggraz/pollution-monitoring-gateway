@@ -8,6 +8,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Path("/nodes")
@@ -18,10 +19,9 @@ public class NodeService {
     public Response addNode(Node n) {
         try {
             NodeList.getInstance().addNode(n);
-            ArrayList<Node> nodeList = NodeList.getInstance().getList();
+            List<Node> nodeList = NodeList.getInstance().getList();
             return Response.ok(nodeList).build();
         } catch (NonUniqueNodeIdException e) {
-            e.printStackTrace();
             return Response.status(400, e.getErrorMessage()).build();
         }
     }
