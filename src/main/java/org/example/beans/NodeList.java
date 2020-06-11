@@ -22,6 +22,9 @@ public class NodeList {
         return instance;
     }
 
+    // If not synchronized there could be race condition problems
+    // because ArrayList constructor loops all list elements while
+    // other threads may be altering the list
     public synchronized List<Node> getList() {
         return new ArrayList<Node>(list);
     }
